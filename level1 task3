@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Data Analytics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        #chart-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sport Data Analytics</h1>
+    </header>
+    <main>
+        <section id="scores-chart">
+            <h2>Scores</h2>
+            <canvas id="scoresChart"></canvas>
+        </section>
+        <section id="player-performance-chart">
+            <h2>Player Performance</h2>
+            <canvas id="playerPerformanceChart"></canvas>
+        </section>
+        <section id="team-ranking-chart">
+            <h2>Team Ranking</h2>
+            <canvas id="teamRankingChart"></canvas>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample data (replace with your data)
+            const scoresData = {
+                labels: ['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'],
+                datasets: [{
+                    label: 'Team A',
+                    data: [3, 2, 4, 1, 5],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Team B',
+                    data: [2, 3, 1, 4, 2],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const playerPerformanceData = {
+                labels: ['Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5'],
+                datasets: [{
+                    label: 'Goals Scored',
+                    data: [5, 8, 3, 6, 4],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const teamRankingData = {
+                labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+                datasets: [{
+                    label: 'Ranking',
+                    data: [1, 2, 3, 4, 5],
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            // Options for the charts
+            const options = {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            };
+
+            // Create charts
+            createChart('scoresChart', 'line', scoresData, options);
+            createChart('playerPerformanceChart', 'bar', playerPerformanceData, options);
+            createChart('teamRankingChart', 'bar', teamRankingData, options);
+
+            function createChart(id, type, data, options) {
+                const ctx = document.getElementById(id).getContext('2d');
+                new Chart(ctx, {
+                    type: type,
+                    data: data,
+                    options: options
+                });
+            }
+        });
+    </script>
+</body>
+</html>
